@@ -1,0 +1,325 @@
+You are a senior backend engineer.
+
+Build a complete backend infrastructure for a narrative AI system called "RolePlayGPT".
+
+The system supports a Game Master GPT that runs long-form RPG campaigns using structured world simulation.
+
+Your goal is to build a clean, production-ready backend that provides:
+
+• Google Drive document retrieval (RAG)
+• campaign state storage
+• autosave system
+• development test environment
+• quick system tests
+• long simulation tests
+• FastAPI integration endpoints
+
+Follow this specification exactly.
+
+----------------------------------------------------
+
+PROJECT NAME
+
+RolePlayGPT
+
+----------------------------------------------------
+
+TECH STACK
+
+Python 3.11
+FastAPI
+LlamaIndex
+OpenAI embeddings
+Supabase vector OR Chroma vector DB
+PyYAML
+PyTest
+
+----------------------------------------------------
+
+PROJECT STRUCTURE
+
+Create this structure:
+
+roleplaygpt/
+
+backend/
+    app/
+        api/
+            retrieval.py
+            campaign.py
+            tests.py
+
+        services/
+            drive_indexer.py
+            rag_engine.py
+            campaign_storage.py
+            test_runner.py
+
+        models/
+            world_state.py
+            faction.py
+            quest.py
+
+        config.py
+        main.py
+
+storage/
+    RolePlayGPT_Generated_Files/
+    RolePlayGPT_Dev_Tests/
+
+tests/
+    quick_tests.py
+    full_simulation.py
+
+scripts/
+    reindex_drive.py
+
+README.md
+
+----------------------------------------------------
+
+SYSTEM CAPABILITIES
+
+The backend must support the following GPT features:
+
+1. Drive Story Retrieval (RAG)
+2. Campaign World State persistence
+3. Quest storage
+4. Timeline tracking
+5. Recap generation
+6. Development test runs
+7. Campaign simulation testing
+
+----------------------------------------------------
+
+GOOGLE DRIVE RAG SYSTEM
+
+Implement Google Drive retrieval.
+
+Requirements:
+
+• use LlamaIndex
+• load documents from a specified Drive folder
+• generate embeddings
+• store vector index locally
+• allow semantic querying
+
+Files:
+
+services/drive_indexer.py
+services/rag_engine.py
+
+Functions required:
+
+index_drive_folder(folder_id)
+query_rag(query)
+
+Persist index to:
+
+storage/vector_index/
+
+----------------------------------------------------
+
+RETRIEVAL API
+
+Create endpoint:
+
+POST /drive-rag-query
+
+Request:
+{
+ "query": "text"
+}
+
+Response:
+{
+ "result": "retrieved snippets"
+}
+
+----------------------------------------------------
+
+CAMPAIGN STORAGE
+
+Implement YAML storage system.
+
+Files stored in:
+
+storage/RolePlayGPT_Generated_Files/
+
+Data files:
+
+world_state.yaml
+timeline.md
+recap.md
+quests.yaml
+
+Functions required:
+
+save_world_state()
+load_world_state()
+
+append_timeline()
+
+update_recap()
+
+----------------------------------------------------
+
+DEV TEST DIRECTORY
+
+Create development testing directory:
+
+storage/RolePlayGPT_Dev_Tests/
+
+Structure:
+
+test_runs/
+test_results/
+test_recaps/
+test_world_state/
+
+Autosave during tests should write here.
+
+----------------------------------------------------
+
+QUICK TEST HARNESS
+
+Create quick system test runner.
+
+tests/quick_tests.py
+
+Tests should verify:
+
+• session bootstrap
+• scene engine stub
+• narrative pressure clock
+• faction simulation
+• event queue trigger
+• quest generation
+• autosave
+
+Return structured report:
+
+SYSTEM TEST REPORT
+
+Bootstrap: PASS
+Scene Engine: PASS
+Faction Simulation: PASS
+Event Queue: PASS
+Quest Generator: PASS
+Autosave: PASS
+
+----------------------------------------------------
+
+FULL CAMPAIGN SIMULATION
+
+Create full campaign simulation test.
+
+tests/full_simulation.py
+
+Simulate:
+
+20 campaign turns.
+
+Each turn should:
+
+• update world_state
+• advance faction plans
+• generate quests
+• append timeline entry
+• update recap
+• check event triggers
+
+Return report:
+
+SIMULATION REPORT
+
+Turns simulated
+Events triggered
+Faction conflicts
+Quests generated
+Recap compressions
+System stability
+
+----------------------------------------------------
+
+FASTAPI SERVER
+
+Create FastAPI server in main.py.
+
+Endpoints required:
+
+POST /drive-rag-query
+POST /tests/run_quick
+POST /tests/run_full
+
+Start command:
+
+uvicorn app.main:app --reload
+
+----------------------------------------------------
+
+CONFIGURATION
+
+Create config.py.
+
+Environment variables:
+
+OPENAI_API_KEY
+DRIVE_FOLDER_ID
+RAG_INDEX_PATH
+TEST_STORAGE_PATH
+CAMPAIGN_STORAGE_PATH
+
+Use dotenv.
+
+----------------------------------------------------
+
+REINDEX SCRIPT
+
+Create:
+
+scripts/reindex_drive.py
+
+Script should:
+
+• load Google Drive docs
+• rebuild vector index
+• persist embeddings
+
+----------------------------------------------------
+
+DOCUMENTATION
+
+Create README.md explaining:
+
+• architecture
+• how to configure Drive
+• how to start server
+• how to run quick tests
+• how to run simulation tests
+• how GPT connects to retrieval endpoint
+
+----------------------------------------------------
+
+ENGINEERING REQUIREMENTS
+
+• modular architecture
+• clear type hints
+• docstrings
+• error handling
+• clean logging
+
+----------------------------------------------------
+
+FINAL STEP
+
+When finished:
+
+1. verify project builds
+2. run quick tests
+3. run simulation tests
+4. output setup instructions
+
+----------------------------------------------------
+
+Build the entire project.
